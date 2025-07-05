@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import NewsCard from '../../../components/newsCard/NewsCard';
 import { useNewsStore } from '../../../store/main/useNewsStore';
+import SkeletonNewsCard from '../../../components/newsCard/SkeltonNewsCard';
 
 const HomeScreen = () => {
   const { news, fetchNextPage, isLoading, reset, loadSaved, isSavedLoading } = useNewsStore();
@@ -30,15 +31,7 @@ const HomeScreen = () => {
     fetchNextPage();
   };
 
-  const renderFooter = () => (isLoading ? <ActivityIndicator style={{ margin: 10 }} /> : null);
 
-  if (isSavedLoading && !news) {
-    return (
-      <SafeAreaView style={[styles.container, styles.center]}>
-        <ActivityIndicator size="large" />
-      </SafeAreaView>
-    );
-  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,25 +44,23 @@ const HomeScreen = () => {
         </View>
         <View style={styles.side} />
       </View>
-
-      <FlatList
-        data={news}
-        renderItem={({ item }) => <NewsCard item={item} />}
-        keyExtractor={(item) => item.id.toString()}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={renderFooter}
-        refreshControl={
-          <RefreshControl
-            refreshing={false}
-            onRefresh={async () => {
-              reset();
-              await loadSaved();
-              await fetchNextPage();
-            }}
+      {
+        isLoading ?
+          <SafeAreaView style={[styles.container, styles.center, { marginTop: 230 }]}>
+            <SkeletonNewsCard />
+            <SkeletonNewsCard />
+            <SkeletonNewsCard />
+          </SafeAreaView>
+          :
+          <FlatList
+            data={news}
+            renderItem={({ item }) => <NewsCard item={item} />}
+            keyExtractor={(item) => item.id.toString()}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.5}
           />
-        }
-      />
+      }
+
     </SafeAreaView>
   );
 };
