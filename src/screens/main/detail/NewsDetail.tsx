@@ -18,7 +18,6 @@ const NewsDetail = () => {
             <Text style={styles.description}>{item.description}</Text>
             <Text style={styles.description}>{item.description}</Text>
             <Text style={styles.date}>{item.date}</Text>
-
         </SafeAreaView>
     );
 };
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
     container: { padding: 16, gap: 8, marginHorizontal: 12 },
     image: { width: '100%', height: 280, borderRadius: 12, resizeMode: "contain" },
     title: { fontSize: 24, fontWeight: 'bold', marginVertical: 10 },
-    date: { fontSize: 14, color: '#888', marginBottom: 10,  alignSelf: 'flex-end',marginTop:12,right:6},
+    date: { fontSize: 14, color: '#888', marginBottom: 10, alignSelf: 'flex-end', marginTop: 12, right: 6 },
     description: { fontSize: 16, lineHeight: 24, color: '#333' },
     header: {
         alignItems: "center",

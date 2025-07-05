@@ -6,4 +6,6 @@ export type RootStackParamList = {
   [Routes.detail]: { item: News };
   [Routes.bottom]: undefined;
   [Routes.settings]: undefined;
+  [Routes.save]: undefined;
+
 };

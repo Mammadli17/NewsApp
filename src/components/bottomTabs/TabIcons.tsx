@@ -1,4 +1,3 @@
-// navigation/TabIcons.tsx
 import React from 'react';
 import { Routes } from '../../navigations/routes';
 import { SvgImage } from '../svgImage/SvgImage';
@@ -21,6 +20,9 @@ const TabIcons = ({ routeName, focused }: Props) => {
         case Routes.settings:
             iconSource = require('../../assets/svg/settings/settings.svg');
             break;
+        case Routes.save:
+            iconSource = require('../../assets/svg/saved/saved.svg');
+            break;
     }
 
     return (
@@ -29,6 +31,7 @@ const TabIcons = ({ routeName, focused }: Props) => {
             height={24}
             width={24}
             fill={fillColor}
+            stroke={fillColor}
         />
     );
 };

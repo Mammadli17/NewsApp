@@ -1,4 +1,3 @@
-// navigation/TabLabels.tsx
 import React from 'react';
 import { Text } from 'react-native';
 import { Routes } from '../../navigations/routes';
@@ -18,6 +17,9 @@ const TabLabels = ({ routeName, focused, color }: Props) => {
       break;
     case Routes.settings:
       label = 'Ayarlar';
+      break;
+    case Routes.save:
+      label = 'Yadda saxlanılanlar';
       break;
     default:
       label = 'Tab';

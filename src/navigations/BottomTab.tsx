@@ -5,6 +5,7 @@ import SettingsScreen from '../screens/main/settings/SettingsScreen';
 import { Routes } from './routes';
 import TabIcons from '../components/bottomTabs/TabIcons';
 import TabLabels from '../components/bottomTabs/TabLabels';
+import SavedScreen from '../screens/main/saved/SavedScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,10 +20,10 @@ const BottomTabNavigator = () => {
         tabBarLabel: ({ focused, color }) => (
           <TabLabels routeName={route.name} focused={focused} color={color} />
         ),
-        tabBarActiveTintColor: 'rgba(1, 86, 86, 1)',      
-        tabBarInactiveTintColor: '#8e8e93',    
+        tabBarActiveTintColor: 'rgba(1, 86, 86, 1)',
+        tabBarInactiveTintColor: '#8e8e93',
         tabBarStyle: {
-          backgroundColor: '#fff',            
+          backgroundColor: '#fff',
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
           height: 80,
@@ -31,6 +32,7 @@ const BottomTabNavigator = () => {
       })}
     >
       <Tab.Screen name={Routes.home} component={HomeScreen} />
+      <Tab.Screen name={Routes.save} component={SavedScreen} />
       <Tab.Screen name={Routes.settings} component={SettingsScreen} />
     </Tab.Navigator>
   );

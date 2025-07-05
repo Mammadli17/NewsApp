@@ -1,13 +1,28 @@
 import React, { useEffect } from 'react';
-import { View, FlatList, ActivityIndicator, RefreshControl, SafeAreaView, Text, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  Image,
+} from 'react-native';
 import NewsCard from '../../../components/newsCard/NewsCard';
 import { useNewsStore } from '../../../store/main/useNewsStore';
 
 const HomeScreen = () => {
-  const { news, fetchNextPage, isLoading, reset } = useNewsStore();
+  const { news, fetchNextPage, isLoading, reset, loadSaved, isSavedLoading } = useNewsStore();
 
   useEffect(() => {
-    fetchNextPage();
+    const initialize = async () => {
+      await loadSaved();
+      await fetchNextPage();
+    };
+
+    initialize();
+
     return () => reset();
   }, []);
 
@@ -15,9 +30,15 @@ const HomeScreen = () => {
     fetchNextPage();
   };
 
-  const renderFooter = () => isLoading ? (
-    <ActivityIndicator style={{ margin: 10 }} />
-  ) : null;
+  const renderFooter = () => (isLoading ? <ActivityIndicator style={{ margin: 10 }} /> : null);
+
+  if (isSavedLoading) {
+    return (
+      <SafeAreaView style={[styles.container, styles.center]}>
+        <ActivityIndicator size="large" />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,6 +51,7 @@ const HomeScreen = () => {
         </View>
         <View style={styles.side} />
       </View>
+
       <FlatList
         data={news}
         renderItem={({ item }) => <NewsCard item={item} />}
@@ -38,10 +60,14 @@ const HomeScreen = () => {
         onEndReachedThreshold={0.5}
         ListFooterComponent={renderFooter}
         refreshControl={
-          <RefreshControl refreshing={false} onRefresh={() => {
-            reset();
-            fetchNextPage();
-          }} />
+          <RefreshControl
+            refreshing={false}
+            onRefresh={async () => {
+              reset();
+              await loadSaved();
+              await fetchNextPage();
+            }}
+          />
         }
       />
     </SafeAreaView>
@@ -53,6 +79,10 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     flexDirection: 'row',
@@ -73,10 +103,6 @@ const styles = StyleSheet.create({
     height: 28,
     borderRadius: 8,
     resizeMode: 'contain',
-  },
-  center: {
-    flex: 1,
-    alignItems: 'center',
   },
   headerText: {
     fontSize: 22,

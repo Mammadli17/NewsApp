@@ -4,4 +4,5 @@ export interface News {
   description: string;
   date: string;
   image: string;
+  isSaved:boolean
 }

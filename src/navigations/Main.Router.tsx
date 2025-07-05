@@ -12,6 +12,7 @@ const MainStackNavigator = () => {
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name={Routes.bottom} component={BottomTabNavigator} />
       <MainStack.Screen name={Routes.detail} component={NewsDetail} />
+      
     </MainStack.Navigator>
   );
 };
