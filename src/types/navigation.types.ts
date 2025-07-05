@@ -4,5 +4,5 @@ export type RootStackParamList = {
   [Routes.home]: undefined;
   [Routes.detail]: undefined;
   [Routes.bottom]: undefined;
-
+  [Routes.settings]: undefined;
 };

@@ -3,10 +3,7 @@ const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro
 const defaultConfig = getDefaultConfig(__dirname);
 const { assetExts, sourceExts } = defaultConfig.resolver;
 
-/**
- * Metro yapılandırması
- * https://facebook.github.io/metro/docs/configuration
- */
+
 const config = {
   resetCache: true,
   transformer: {
