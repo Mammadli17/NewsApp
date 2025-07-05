@@ -32,7 +32,7 @@ const HomeScreen = () => {
 
   const renderFooter = () => (isLoading ? <ActivityIndicator style={{ margin: 10 }} /> : null);
 
-  if (isSavedLoading) {
+  if (isSavedLoading && !news) {
     return (
       <SafeAreaView style={[styles.container, styles.center]}>
         <ActivityIndicator size="large" />
