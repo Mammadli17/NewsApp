@@ -38,7 +38,7 @@ export const useNewsStore = create<NewsState>((set, get) => ({
         isLoading: false,
       });
     } catch (err) {
-      console.error('News fetch failed:', err);
+      console.error('Xeta:', err);
       set({ isLoading: false });
     }
   },
