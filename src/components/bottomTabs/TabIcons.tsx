@@ -10,7 +10,7 @@ interface Props {
 }
 
 const TabIcons = ({ routeName, focused }: Props) => {
-    const fillColor = focused ? '#007AFF' : '#8e8e93';
+    const fillColor = focused ? 'rgba(1, 86, 86, 1)' : '#8e8e93';
 
     let iconSource;
 

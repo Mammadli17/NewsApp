@@ -19,14 +19,14 @@ const BottomTabNavigator = () => {
         tabBarLabel: ({ focused, color }) => (
           <TabLabels routeName={route.name} focused={focused} color={color} />
         ),
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: '#8e8e93',
+        tabBarActiveTintColor: 'rgba(1, 86, 86, 1)',      
+        tabBarInactiveTintColor: '#8e8e93',    
         tabBarStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: '#fff',            
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
-          height: 60,
-          paddingBottom: 5,
+          height: 80,
+          paddingTop: 10,
         },
       })}
     >

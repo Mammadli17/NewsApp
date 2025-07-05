@@ -14,7 +14,7 @@ const TabLabels = ({ routeName, focused, color }: Props) => {
 
   switch (routeName) {
     case Routes.home:
-      label = 'Ana Səhifə';
+      label = 'Xəbərlər';
       break;
     case Routes.settings:
       label = 'Ayarlar';
