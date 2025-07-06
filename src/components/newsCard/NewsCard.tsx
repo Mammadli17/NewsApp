@@ -14,19 +14,22 @@ type NewsScreenProp = NativeStackNavigationProp<RootStackParamList, Routes.detai
 const NewsCard = ({ item }: { item: News }) => {
   const navigation = useNavigation<NewsScreenProp>();
   const toggleSave = useNewsStore(state => state.toggleSave);
-  const { theme } = useTheme(); 
+  const { theme } = useTheme();
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate(Routes.detail, { item })}>
       <View style={[styles.card]}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: item.image }} style={styles.image} />
-          <TouchableOpacity style={[styles.savedIconWrapper, { backgroundColor: theme.colors.background }]} onPress={() => toggleSave(item.id)}>
+          <TouchableOpacity
+            style={[styles.savedIconWrapper, { backgroundColor: theme.colors.background }]}
+            onPress={() => toggleSave(item.id)}
+          >
             <SvgImage
               source={require('../../assets/svg/saved/saved.svg')}
               height={24}
               width={24}
-              fill={item.isSaved ? theme.colors.primary : theme.colors.text}
+              fill={item.isSaved ? 'rgba(1, 86, 86, 1)' : theme.colors.text}
               stroke={theme.colors.primary}
             />
           </TouchableOpacity>
@@ -45,36 +48,13 @@ const NewsCard = ({ item }: { item: News }) => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    padding: 10,
-  },
-  imageContainer: {
-    position: 'relative',
-  },
-  image: {
-    width: '100%',
-    height: 200,
-    borderRadius: 8,
-  },
-  savedIconWrapper: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    padding: 6,
-    borderRadius: 20,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginVertical: 5,
-  },
-  description: {
-    fontSize: 14,
-  },
-  date: {
-    fontSize: 12,
-    marginTop: 5,
-  },
+  card: { padding: 10 },
+  imageContainer: { position: 'relative' },
+  image: { width: '100%', height: 200, borderRadius: 8 },
+  savedIconWrapper: { position: 'absolute', top: 10, right: 10, padding: 6, borderRadius: 20 },
+  title: { fontSize: 18, fontWeight: 'bold', marginVertical: 5 },
+  description: { fontSize: 14 },
+  date: { fontSize: 12, marginTop: 5 },
 });
 
-export default NewsCard;
+export default React.memo(NewsCard);
