@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Switch, StyleSheet, Platform } from 'react-native';
+import { View, Text, Switch, StyleSheet, Platform, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../../../context/ThemeContext';
 
@@ -8,22 +8,27 @@ const SettingsScreen = () => {
   const isDark = mode === 'dark';
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.colors.background }]}>
-      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>Ayarlar</Text>
-
+       <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+         <View style={styles.header}>
+           <View style={styles.side}>
+             <Image source={require('../../../assets/images/oba.jpg')} style={styles.logo} />
+           </View>
+           <View style={styles.center}>
+             <Text style={[styles.headerText, { color: theme.colors.text }]}>Ayarlar</Text>
+           </View>
+           <View style={styles.side} />
+         </View>
         <View style={[styles.card, { backgroundColor: isDark ? '#1E1E1E' : '#F4F4F4' }]}>
           <View style={styles.row}>
             <Text style={[styles.label, { color: theme.colors.text }]}>🌙 Dark Mode</Text>
             <Switch
               value={isDark}
               onValueChange={toggleTheme}
-              thumbColor={Platform.OS === 'android' ? (isDark ? '#fff' : '#fff') : undefined}
-              trackColor={{ false: '#bbb', true: '#6C63FF' }}
+              thumbColor={Platform.OS === 'android' ? (isDark ? 'rgba(1, 86, 86, 1)' : '#fff') : undefined}
+              trackColor={{ false: '#bbb', true: 'rgba(1, 86, 86, 1)' }}
             />
           </View>
         </View>
-      </View>
     </SafeAreaView>
   );
 };
@@ -36,7 +41,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 24,
   },
   title: {
     fontSize: 28,
@@ -63,5 +67,34 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     fontWeight: '500',
+  },
+
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+    paddingHorizontal: 16,
+    paddingTop: 10,
+  },
+  side: {
+    width: 32,
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 28,
+    height: 28,
+    borderRadius: 8,
+    resizeMode: 'contain',
+  },
+  headerText: {
+    fontSize: 22,
+    fontWeight: '800',
   },
 });
