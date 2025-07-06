@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import {
   View,
   FlatList,
-  ActivityIndicator,
-  RefreshControl,
   SafeAreaView,
   Text,
   StyleSheet,
@@ -12,9 +10,11 @@ import {
 import NewsCard from '../../../components/newsCard/NewsCard';
 import { useNewsStore } from '../../../store/main/useNewsStore';
 import SkeletonNewsCard from '../../../components/newsCard/SkeltonNewsCard';
+import { useTheme } from '../../../context/ThemeContext';
 
 const HomeScreen = () => {
-  const { news, fetchNextPage, isLoading, reset, loadSaved, isSavedLoading } = useNewsStore();
+  const { news, fetchNextPage, isLoading, reset, loadSaved } = useNewsStore();
+  const { theme } = useTheme(); 
 
   useEffect(() => {
     const initialize = async () => {
@@ -23,7 +23,6 @@ const HomeScreen = () => {
     };
 
     initialize();
-
     return () => reset();
   }, []);
 
@@ -31,36 +30,35 @@ const HomeScreen = () => {
     fetchNextPage();
   };
 
-
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.header}>
         <View style={styles.side}>
           <Image source={require('../../../assets/images/oba.jpg')} style={styles.logo} />
         </View>
         <View style={styles.center}>
-          <Text style={styles.headerText}>Xəbərlər</Text>
+          <Text style={[styles.headerText, { color: theme.colors.text }]}>Xəbərlər</Text>
         </View>
         <View style={styles.side} />
       </View>
-      {
-        isLoading ?
-          <SafeAreaView style={[styles.container, styles.center, { marginTop: 230 }]}>
-            <SkeletonNewsCard />
-            <SkeletonNewsCard />
-            <SkeletonNewsCard />
-          </SafeAreaView>
-          :
-          <FlatList
-            data={news}
-            renderItem={({ item }) => <NewsCard item={item} />}
-            keyExtractor={(item) => item.id.toString()}
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.5}
-          />
-      }
 
+      {isLoading ? (
+        <View style={[styles.center, { marginTop: 230 }]}>
+          <SkeletonNewsCard />
+          <SkeletonNewsCard />
+          <SkeletonNewsCard />
+        </View>
+      ) : (
+        <FlatList
+          data={news}
+          renderItem={({ item }) => <NewsCard item={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          contentContainerStyle={{ paddingBottom: 24 }}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 22,
-    color: 'rgba(1, 86, 86, 1)',
     fontWeight: '800',
   },
 });

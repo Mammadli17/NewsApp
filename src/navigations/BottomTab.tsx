@@ -6,10 +6,13 @@ import { Routes } from './routes';
 import TabIcons from '../components/bottomTabs/TabIcons';
 import TabLabels from '../components/bottomTabs/TabLabels';
 import SavedScreen from '../screens/main/saved/SavedScreen';
+import { useTheme } from '../context/ThemeContext';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const { theme } = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -23,11 +26,16 @@ const BottomTabNavigator = () => {
         tabBarActiveTintColor: 'rgba(1, 86, 86, 1)',
         tabBarInactiveTintColor: '#8e8e93',
         tabBarStyle: {
-          backgroundColor: '#fff',
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
+          backgroundColor: theme.colors.background,
+    
           height: 80,
           paddingTop: 10,
+          borderTopWidth: 0,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -3 },
+          shadowOpacity: 0.05,
+          shadowRadius: 5,
+          elevation: 8,
         },
       })}
     >
