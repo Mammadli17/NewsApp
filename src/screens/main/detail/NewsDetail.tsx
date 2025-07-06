@@ -31,7 +31,6 @@ const NewsDetail = () => {
 
             </View>
             <Text style={styles.title}>{item.title}</Text>
-
             <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.description}>{item.description}</Text>
             <Text style={styles.description}>{item.description}</Text>
