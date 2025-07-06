@@ -29,8 +29,8 @@ const NewsCard = ({ item }: { item: News }) => {
               source={require('../../assets/svg/saved/saved.svg')}
               height={24}
               width={24}
-              fill={item.isSaved ? 'rgba(1, 86, 86, 1)' : theme.colors.text}
-              stroke={theme.colors.primary}
+              fill={item.isSaved ? 'rgba(1, 86, 86, 1)' : "white"}
+              stroke={'black'}
             />
           </TouchableOpacity>
         </View>
